@@ -5,7 +5,7 @@ from nltk.corpus import stopwords
 
 
 def preprocess_string(x_str, return_joined=True):
-    '''Returns a cleaned string specifically from the MBTI dataset.
+    '''Returns a cleaned string specifically for the MBTI dataset posts.
 
     If return_joined is True, the tokens are joined into a single string so
     that it can be passed into SciKit learn's frequency counter. Otherwise
@@ -20,7 +20,7 @@ def preprocess_string(x_str, return_joined=True):
     # remove http links
     x_str = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', x_str)
 
-    # remove puncuation
+    # remove punctuation
     x_str = "".join([ci for ci in x_str if ci not in string.punctuation])
 
     # tokenise
