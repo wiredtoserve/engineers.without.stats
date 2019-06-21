@@ -12,7 +12,12 @@ import re
 import string
 
 from data_processing import preprocessing
-from classifier import pre_classification, multinomial
+from classifier import pre_classification, multinomial, majority_classifier, random_forrest, support_vector, \
+    logistic_regression
+
+import warnings
+
+warnings.filterwarnings('ignore')
 
 
 def main():
@@ -46,9 +51,32 @@ def main():
     train_label = [y_ie_train, y_ns_train, y_tf_train, y_jp_train]
     test_label = [y_ie_test, y_ns_test, y_tf_test, y_jp_test]
 
-    print('Trying multinomial')
+    # dictionary to output the scores
+    model_scores = {}
 
-    multinomial(X_train, X_test, train_label, test_label)
+    f, ax = plt.subplots(2, 2)
+
+    print('Trying majority \n')
+    model_scores['majority'] = majority_classifier(train_label, test_label, X_test)
+
+    print('Trying multinomial \n')
+    model_scores['multinomial'] = multinomial(X_train, X_test, train_label, test_label, ax[1,1])
+
+    print('Trying random forrest \n')
+    model_scores['random_forrest'] = random_forrest(X_train, X_test, train_label, test_label, ax[0,1])
+
+    print('Trying support vector \n')
+    model_scores['support_vector'] = support_vector(X_train, X_test, train_label, test_label, ax[1,0])
+
+    print('Trying logistic regression \n')
+    model_scores['logistic_regression'] = logistic_regression(X_train, X_test, train_label, test_label, ax[0,0])
+
+    plt.show(f)
+
+    summary = pd.DataFrame.from_dict(model_scores, orient='index', columns=['I/E', 'N/S', 'T/F', 'J/P'])
+
+    print('\n \n \n')
+    print(summary)
 
 
 if __name__ == "__main__":

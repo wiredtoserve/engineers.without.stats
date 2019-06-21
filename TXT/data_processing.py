@@ -103,10 +103,10 @@ def preprocessing(run=False):
     if run:
         df = pd.read_csv('dataFiles/mbti_1.csv')
         df['processed_post'] = df['posts'].apply(lambda x: preprocess_string(x, True))
+        df = df.merge(df.apply(lambda row: get_types(row), axis=1))
 
     else:
         df = pd.read_csv('dataFiles/dataFile.csv')
 
-    df = df.merge(df.apply(lambda row: get_types(row), axis=1))
 
     return df
