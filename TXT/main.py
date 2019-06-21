@@ -12,6 +12,7 @@ import re
 import string
 
 from data_processing import preprocessing
+from classifier import pre_classification, multinomial
 
 
 def main():
@@ -35,10 +36,19 @@ def main():
     :output: the summary of statistics of the classifiers
     '''
 
-    # Step 1
+    # Step 1: pass parameter True if you want to compute the processor again
     df = preprocessing(False)
 
+    # Step 2
+    X_train, X_test, y_ie_train, y_ie_test, y_ns_train, y_ns_test, y_tf_train, y_tf_test, y_jp_train, y_jp_test = pre_classification(
+        df)
 
+    train_label = [y_ie_train, y_ns_train, y_tf_train, y_jp_train]
+    test_label = [y_ie_test, y_ns_test, y_tf_test, y_jp_test]
+
+    print('Trying multinomial')
+
+    multinomial(X_train, X_test, train_label, test_label)
 
 
 if __name__ == "__main__":
