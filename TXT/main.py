@@ -42,7 +42,8 @@ def main():
     '''
 
     # Step 1: pass parameter True if you want to compute the processor again
-    df = preprocessing(False)
+    print('Starting pre-processing... \n')
+    df = preprocessing(True)
 
     # Step 2
     X_train, X_test, y_ie_train, y_ie_test, y_ns_train, y_ns_test, y_tf_train, y_tf_test, y_jp_train, y_jp_test = pre_classification(

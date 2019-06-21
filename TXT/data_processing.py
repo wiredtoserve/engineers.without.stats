@@ -6,6 +6,7 @@ import re
 import string
 
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 
 def get_types(row):
@@ -75,8 +76,12 @@ def preprocess_string(x_str, return_joined=True):
     tokens = nltk.word_tokenize(x_str)
 
     # stem
-    porter = nltk.PorterStemmer()
-    stemmed_tokens = [porter.stem(token) for token in tokens]
+    # porter = nltk.PorterStemmer()
+    # stemmed_tokens = [porter.stem(token) for token in tokens]
+
+    # lemmatize
+    lemm = WordNetLemmatizer()
+    stemmed_tokens = [lemm.lemmatize(token) for token in tokens]
 
     # remove stop words
     stopped_tokens = [ti for ti in stemmed_tokens if ti not in stopwords.words("english")]
@@ -101,9 +106,9 @@ def preprocessing(run=False):
     '''
 
     if run:
-        df = pd.read_csv('dataFiles/mbti_1.csv')
+        df = pd.read_csv('dataFiles/toy_data.csv')
         df['processed_post'] = df['posts'].apply(lambda x: preprocess_string(x, True))
-        df = df.merge(df.apply(lambda row: get_types(row), axis=1))
+        #df = df.merge(df.apply(lambda row: get_types(row), axis=1))
 
     else:
         df = pd.read_csv('dataFiles/dataFile.csv')

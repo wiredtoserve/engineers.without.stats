@@ -37,6 +37,11 @@ def pre_classification(df):
     return X_train, X_test, y_ie_train, y_ie_test, y_ns_train, y_ns_test, y_tf_train, y_tf_test, y_jp_train, y_jp_test
 
 
+def test_original():
+    df_test = pd.read_csv('dataFiles/dataFile.csv')
+    return df_test
+
+
 def majority_classifier(train_label, test_label, X_test):
     model_accuracy = []
 
@@ -51,9 +56,20 @@ def majority_classifier(train_label, test_label, X_test):
 def multinomial(X_train, X_test, train_label, test_label, ax):
     model_accuracy = []
 
+    # Get the original data
+    df_test = test_original()
+    test_label_original = [df_test['IE'], df_test['NS'], df_test['TF'], df_test['JP']]
+
     for i in range(4):
+        if i > 1:
+            analyze_string = 'word'
+            n_gram = (1,1)
+        else:
+            analyze_string = 'char'
+            n_gram = (2, 2)
+
         nb_pipeline = Pipeline([
-            ('vector', CountVectorizer()),
+            ('vector', CountVectorizer(ngram_range = n_gram, analyzer=analyze_string)),
             ('tfidf', TfidfTransformer()),
             ('Classifier', MultinomialNB())
         ])
@@ -67,15 +83,16 @@ def multinomial(X_train, X_test, train_label, test_label, ax):
         model_accuracy.append(precision_recall_fscore_support(test_label[i], predictions, average='weighted')[2])
 
         # Compute ROC curve and ROC area for each class
+        predictions_original = nb_pipeline.predict(df_test['processed_post'])
         fpr = dict()
         tpr = dict()
         roc_auc = dict()
         for j in range(2):
-            fpr[j], tpr[j], _ = roc_curve(test_label[i], predictions)
+            fpr[j], tpr[j], _ = roc_curve(test_label_original[i], predictions_original)
             roc_auc[j] = auc(fpr[j], tpr[j])
 
         # Compute micro-average ROC curve and ROC area
-        fpr["micro"], tpr["micro"], _ = roc_curve(test_label[i].ravel(), predictions.ravel())
+        fpr["micro"], tpr["micro"], _ = roc_curve(test_label_original[i].ravel(), predictions_original.ravel())
         roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
 
         color_type = ['darkorange', 'red', 'blue', 'green']
@@ -98,9 +115,20 @@ def multinomial(X_train, X_test, train_label, test_label, ax):
 def random_forrest(X_train, X_test, train_label, test_label, ax):
     model_accuracy = []
 
+    # Get the original data
+    df_test = test_original()
+    test_label_original = [df_test['IE'], df_test['NS'], df_test['TF'], df_test['JP']]
+
     for i in range(4):
+        if i > 1:
+            analyze_string = 'word'
+            n_gram = (1,1)
+        else:
+            analyze_string = 'char'
+            n_gram = (2, 2)
+
         rf_pipeline = Pipeline([
-            ('vector', CountVectorizer()),
+            ('vector', CountVectorizer(ngram_range = n_gram, analyzer=analyze_string)),
             ('tfidf', TfidfTransformer()),
             ('Classifier', RandomForestClassifier(n_estimators=10))
         ])
@@ -114,15 +142,16 @@ def random_forrest(X_train, X_test, train_label, test_label, ax):
         model_accuracy.append(precision_recall_fscore_support(test_label[i], predictions, average='weighted')[2])
 
         # Compute ROC curve and ROC area for each class
+        predictions_original = rf_pipeline.predict(df_test['processed_post'])
         fpr = dict()
         tpr = dict()
         roc_auc = dict()
         for j in range(2):
-            fpr[j], tpr[j], _ = roc_curve(test_label[i], predictions)
+            fpr[j], tpr[j], _ = roc_curve(test_label_original[i], predictions_original)
             roc_auc[j] = auc(fpr[j], tpr[j])
 
         # Compute micro-average ROC curve and ROC area
-        fpr["micro"], tpr["micro"], _ = roc_curve(test_label[i].ravel(), predictions.ravel())
+        fpr["micro"], tpr["micro"], _ = roc_curve(test_label_original[i].ravel(), predictions_original.ravel())
         roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
 
         color_type = ['darkorange', 'red', 'blue', 'green']
@@ -145,9 +174,20 @@ def random_forrest(X_train, X_test, train_label, test_label, ax):
 def support_vector(X_train, X_test, train_label, test_label, ax):
     model_accuracy = []
 
+    # Get the original data
+    df_test = test_original()
+    test_label_original = [df_test['IE'], df_test['NS'], df_test['TF'], df_test['JP']]
+
     for i in range(4):
+        if i > 1:
+            analyze_string = 'word'
+            n_gram = (1,1)
+        else:
+            analyze_string = 'char'
+            n_gram = (2, 2)
+
         svc_pipeline = Pipeline([
-            ('vector', CountVectorizer()),
+            ('vector', CountVectorizer(ngram_range = n_gram, analyzer=analyze_string)),
             ('tfidf', TfidfTransformer()),
             ('Classifier', SVC(gamma='scale'))
         ])
@@ -161,15 +201,16 @@ def support_vector(X_train, X_test, train_label, test_label, ax):
         model_accuracy.append(precision_recall_fscore_support(test_label[i], predictions, average='weighted')[2])
 
         # Compute ROC curve and ROC area for each class
+        predictions_original = svc_pipeline.predict(df_test['processed_post'])
         fpr = dict()
         tpr = dict()
         roc_auc = dict()
         for j in range(2):
-            fpr[j], tpr[j], _ = roc_curve(test_label[i], predictions)
+            fpr[j], tpr[j], _ = roc_curve(test_label_original[i], predictions_original)
             roc_auc[j] = auc(fpr[j], tpr[j])
 
         # Compute micro-average ROC curve and ROC area
-        fpr["micro"], tpr["micro"], _ = roc_curve(test_label[i].ravel(), predictions.ravel())
+        fpr["micro"], tpr["micro"], _ = roc_curve(test_label_original[i].ravel(), predictions_original.ravel())
         roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
 
         color_type = ['darkorange', 'red', 'blue', 'green']
@@ -192,9 +233,20 @@ def support_vector(X_train, X_test, train_label, test_label, ax):
 def logistic_regression(X_train, X_test, train_label, test_label, ax):
     model_accuracy = []
 
+    # Get the original data
+    df_test = test_original()
+    test_label_original = [df_test['IE'], df_test['NS'], df_test['TF'], df_test['JP']]
+
     for i in range(4):
+        if i > 1:
+            analyze_string = 'word'
+            n_gram = (1,1)
+        else:
+            analyze_string = 'char'
+            n_gram = (2, 2)
+
         lr_pipeline = Pipeline([
-            ('vector', CountVectorizer()),
+            ('vector', CountVectorizer(ngram_range = n_gram, analyzer=analyze_string)),
             ('tfidf', TfidfTransformer()),
             ('Classifier', LogisticRegression())
         ])
@@ -208,22 +260,23 @@ def logistic_regression(X_train, X_test, train_label, test_label, ax):
         model_accuracy.append(precision_recall_fscore_support(test_label[i], predictions, average='weighted')[2])
 
         # Compute ROC curve and ROC area for each class
+        predictions_original = lr_pipeline.predict(df_test['processed_post'])
         fpr = dict()
         tpr = dict()
         roc_auc = dict()
         for j in range(2):
-            fpr[j], tpr[j], _ = roc_curve(test_label[i], predictions)
+            fpr[j], tpr[j], _ = roc_curve(test_label_original[i], predictions_original)
             roc_auc[j] = auc(fpr[j], tpr[j])
 
         # Compute micro-average ROC curve and ROC area
-        fpr["micro"], tpr["micro"], _ = roc_curve(test_label[i].ravel(), predictions.ravel())
+        fpr["micro"], tpr["micro"], _ = roc_curve(test_label_original[i].ravel(), predictions_original.ravel())
         roc_auc["micro"] = auc(fpr["micro"], tpr["micro"])
 
         color_type = ['darkorange', 'red', 'blue', 'green']
 
         lw = 2
         ax.plot(fpr[1], tpr[1], color=color_type[i],
-                 lw=lw, label='ROC curve (area = %0.2f)' % roc_auc[1])
+                lw=lw, label='ROC curve (area = %0.2f)' % roc_auc[1])
         ax.set_xlim([0.0, 1.0])
         ax.set_ylim([0.0, 1.05])
         ax.set_xlabel('False Positive Rate')
@@ -231,6 +284,6 @@ def logistic_regression(X_train, X_test, train_label, test_label, ax):
         ax.set_title('Logistic Regression ROC ')
 
     ax.plot([0, 1], [0, 1], color='black', linestyle='--')
-    ax.legend(['I/E', 'N/S', 'T/F', 'J/P', 'random'],loc="lower right")
+    ax.legend(['I/E', 'N/S', 'T/F', 'J/P', 'random'], loc="lower right")
 
     return model_accuracy
