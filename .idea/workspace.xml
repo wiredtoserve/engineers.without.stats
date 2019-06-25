@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1f919327-f2a5-445f-9324-a07416e22b9a" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TXT/.ipynb_checkpoints/Data Processing v2-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/TXT/.ipynb_checkpoints/Data Processing v2-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TXT/Data Processing v2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/TXT/Data Processing v2.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TXT/classifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/TXT/classifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TXT/data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/TXT/data_processing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TXT/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/TXT/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +16,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TXT/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="186">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
               <folding>
                 <element signature="e#63#81#0" expanded="true" />
               </folding>
@@ -34,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/TXT/data_processing.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-13">
-              <caret line="83" column="64" lean-forward="true" selection-start-line="83" selection-start-column="64" selection-end-line="83" selection-end-column="64" />
+              <caret line="83" column="64" selection-start-line="83" selection-start-column="64" selection-end-line="83" selection-end-column="64" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -46,7 +41,7 @@
         <entry file="file://$PROJECT_DIR$/TXT/classifier.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1287">
-              <caret line="250" column="48" lean-forward="true" selection-start-line="250" selection-start-column="48" selection-end-line="250" selection-end-column="48" />
+              <caret line="250" column="48" selection-start-line="250" selection-start-column="48" selection-end-line="250" selection-end-column="48" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -99,10 +94,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1450" />
+    <option name="x" value="10" />
     <option name="y" value="23" />
     <option name="width" value="1104" />
-    <option name="height" value="1042" />
+    <option name="height" value="797" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -216,14 +211,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1450" y="23" width="1104" height="1042" extended-state="0" />
+    <frame x="10" y="23" width="1104" height="797" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info id="DB Browser" order="5" />
       <window_info anchor="bottom" id="DB Execution Console" order="12" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34920636" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.47142857" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Python Console" order="11" />
       <window_info anchor="bottom" id="Terminal" order="9" />
@@ -545,7 +540,7 @@
     <entry file="file://$PROJECT_DIR$/TXT/data_processing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-13">
-          <caret line="83" column="64" lean-forward="true" selection-start-line="83" selection-start-column="64" selection-end-line="83" selection-end-column="64" />
+          <caret line="83" column="64" selection-start-line="83" selection-start-column="64" selection-end-line="83" selection-end-column="64" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -555,7 +550,7 @@
     <entry file="file://$PROJECT_DIR$/TXT/classifier.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1287">
-          <caret line="250" column="48" lean-forward="true" selection-start-line="250" selection-start-column="48" selection-end-line="250" selection-end-column="48" />
+          <caret line="250" column="48" selection-start-line="250" selection-start-column="48" selection-end-line="250" selection-end-column="48" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -564,8 +559,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TXT/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="186">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
           <folding>
             <element signature="e#63#81#0" expanded="true" />
           </folding>
