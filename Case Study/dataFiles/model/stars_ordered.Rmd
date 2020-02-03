@@ -1,0 +1,144 @@
+---
+title: "stars_ordered"
+author: "Mehul"
+date: "17/11/2019"
+output: pdf_document
+---
+
+```{r}
+setwd("~/Documents/GitHub/engineers.without.stats/Case Study/dataFiles/model")
+```
+
+```{r}
+library(MASS)
+library(foreign)
+library(mlogit)
+library(magrittr)
+```
+
+```{r}
+business = read.csv('dataset_3.csv')
+head(business)
+```
+
+```{r}
+business$stars %<>% factor
+business$RestaurantsPriceRange2 %<>% factor
+business$RestaurantsReservations %<>% factor
+```
+
+```{r}
+business$RestaurantsTakeOut %<>% factor
+business$RestaurantsGoodForGroups %<>% factor
+business$GoodForKids %<>% factor
+business$RestaurantsDelivery %<>% factor
+business$RestaurantsAttire %<>% factor
+business$WiFi %<>% factor
+```
+
+```{r}
+business$casual %<>% factor
+business$classy %<>% factor
+business$divey %<>% factor
+business$hipster %<>% factor
+business$intimate %<>% factor
+business$romantic %<>% factor
+business$touristy %<>% factor
+business$trendy %<>% factor
+business$upscale %<>% factor
+business$Alcohol %<>% factor
+```
+
+
+
+```{r}
+#The ordered logit model
+fit_olog1=polr(stars~review_count+RestaurantsPriceRange2+RestaurantsReservations,data=business,method="logistic")
+summary(fit_olog1)
+```
+
+```{r}
+#A function to produce p-values from a polr fit
+polr_pval<-function(fit){
+  fit.c=coef(summary(fit))
+  fit.c=cbind(fit.c,"p-val"=pnorm(abs(fit.c[,"t value"]),lower.tail=FALSE)*2)
+  return(fit.c)
+}
+```
+
+```{r}
+#computing the p-values of each coefficient
+fit_olog1.c=polr_pval(fit_olog1)
+fit_olog1.c
+```
+
+
+```{r}
+fit_olog2=polr(stars~review_count+RestaurantsPriceRange2+RestaurantsReservations+RestaurantsTakeOut+RestaurantsGoodForGroups+GoodForKids+RestaurantsDelivery+RestaurantsAttire+WiFi,data=business,method="logistic")
+summary(fit_olog2)
+```
+
+```{r}
+fit_olog3=polr(stars~review_count+RestaurantsPriceRange2+RestaurantsReservations+RestaurantsTakeOut+RestaurantsGoodForGroups+GoodForKids+RestaurantsDelivery+RestaurantsAttire+WiFi+casual+classy+divey+hipster+intimate+romantic+touristy+trendy+upscale+Alcohol,data=business,method="logistic")
+summary(fit_olog3)
+```
+
+```{r}
+fit_olog3.c=polr_pval(fit_olog3)
+fit_olog3.c
+```
+
+```{r}
+fit_olog4=polr(stars~RestaurantsPriceRange2+RestaurantsReservations+RestaurantsTakeOut+RestaurantsGoodForGroups+GoodForKids+RestaurantsDelivery+RestaurantsAttire+WiFi+casual+classy+divey+hipster+intimate+romantic+touristy+trendy+upscale+Alcohol,data=business,method="logistic")
+summary(fit_olog4)
+```
+
+
+```{r}
+fit_olog4.c=polr_pval(fit_olog4)
+fit_olog4.c
+```
+
+```{r}
+step(fit_olog4)
+```
+
+```{r}
+best_fit <- polr(formula = stars ~ review_count + RestaurantsTakeOut + RestaurantsGoodForGroups + 
+    GoodForKids + RestaurantsAttire + casual + classy + divey + 
+    hipster + intimate + romantic + touristy + trendy + Alcohol, 
+    data = business, method = "logistic")
+summary(best_fit)
+
+# not significant
+#RestaurantsTakeOut1
+#RestaurantsAttiredressy
+#Alcoholbeer_and_wine
+```
+
+
+```{r}
+best_fit.c=polr_pval(best_fit)
+best_fit.c
+```
+
+
+```{r}
+best_fit.c[,4]
+#RestaurantsTakeOut1
+#RestaurantsAttiredressy
+#Alcoholbeer_and_wine
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
