@@ -10,3 +10,9 @@ Case Study/dataFiles/model/.DS_Store
 ML/busy19/.DS_Store
 ML/.DS_Store
 TXT/jupyter notebooks/.DS_Store
+Case Study/dataFiles/csv/business.csv
+Case Study/dataFiles/csv/.ipynb_checkpoints/business-checkpoint.csv
+ML/busy19/train.txt
+TXT/dataFiles/linkedin.json.gz
+TXT/dataFiles/mbti9k_comments.csv
+TXT/dataFiles/typed_posts.csv
